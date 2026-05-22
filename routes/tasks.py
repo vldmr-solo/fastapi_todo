@@ -1,35 +1,10 @@
 from fastapi import APIRouter, HTTPException
 from models import NewTask
 from data import tasks, users
-from routes.users import get_user
+from services.tasks_logic import find_task, get_task_by_user
+from services.users_logic import find_user
 
 router = APIRouter(prefix="/tasks")
-
-
-def find_user(user_id: int):
-    for user in users:
-        if user.get("id") == user_id:
-            return user
-    
-    return None
-
-
-def find_task(task_id: int):
-    for task in tasks:
-        if task.get("id") == task_id:
-            return task
-    
-    return None
-    
-
-def get_task_by_user(user_id: int):
-    result = []
-
-    for task in tasks:
-        if task.get("user_id") == user_id:
-            result.append(task)
-    
-    return result    
 
 
 @router.get("")

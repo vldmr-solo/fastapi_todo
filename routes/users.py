@@ -1,16 +1,9 @@
 from fastapi import APIRouter, HTTPException
 from models import UserData
 from data import users
+from services.users_logic import find_user
 
 router = APIRouter(prefix="/user")
-
-
-def find_user(user_id: int):
-    for user in users:
-        if user.get("id") == user_id:
-            return user
-    
-    return None
 
 
 @router.get("")
