@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException
 from models import UserData
 from data import users
-from services.users_logic import find_user
+from services.users_logic import get_user
 
 router = APIRouter(prefix="/user")
 
@@ -10,6 +10,16 @@ router = APIRouter(prefix="/user")
 def get_users():
     return users
 
+
+@router.get("/{id}")
+def get_user_by_id(id: int):
+    
+    user = get_user(users, id)
+
+    if not user:
+        raise HTTPException(status_code=404, detail="user not found")
+
+    return user
 
 @router.post("")
 def post_users(data: UserData):
@@ -24,18 +34,3 @@ def post_users(data: UserData):
 
     return new_user
 
-
-@router.get("/{id}")
-def get_user(id: int):
-    user = find_user(id)
-
-    if not user:
-        raise HTTPException(status_code=404, detail="user not found")
-       
-
-
-'''
-вопросы: 
-нужно ли делать проверку age на тип данных и тд в post_users
-
-'''

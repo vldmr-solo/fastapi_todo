@@ -8,4 +8,3 @@ class NewTask(BaseModel):
     task: str
     user_id: int
 
-#норм ли NewTask

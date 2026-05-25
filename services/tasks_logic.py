@@ -1,6 +1,4 @@
-from data import tasks
-
-def find_task(task_id: int):
+def get_task(tasks, task_id: int):
     for task in tasks:
         if task.get("id") == task_id:
             return task
@@ -8,7 +6,7 @@ def find_task(task_id: int):
     return None
     
 
-def get_task_by_user(user_id: int):
+def get_task_by_user(tasks, user_id: int):
     result = []
 
     for task in tasks:
